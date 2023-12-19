@@ -45,6 +45,7 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
+void divide(stack_t **stack, unsigned int line_number);
 
 /* Function prototypes for error-related functions */
 void print_usage_error(void);
@@ -57,7 +58,7 @@ void print_pop_error(unsigned int line_number);
 void print_swap_error(unsigned int line_number);
 void print_add_error(unsigned int line_number);
 void print_subtract_error(unsigned int line_number);
-
+void print_divide_error(unsigned int line_number);
 
 #endif /* MONTY_H */
 
