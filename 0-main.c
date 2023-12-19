@@ -36,6 +36,12 @@ void process_line(char *trimmed_line, unsigned int line_number,
 	int argument;
 	int matches = sscanf(trimmed_line, "%s %d", opcode, &argument);
 
+	/* Check if the line is a comment (starts with #) */
+	if (trimmed_line[0] == '#')
+	{
+		process_comment(trimmed_line);
+		return;  /* Ignore comments */
+	}
 	if (matches == 2)
 	{
 		if (strcmp(opcode, "push") == 0)
