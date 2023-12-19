@@ -126,3 +126,14 @@ void print_zero_error(unsigned int line_number)
         exit(EXIT_FAILURE);
 }
 
+/**
+ * print_multiply_error - Prints an error message if the stack contains less
+ *                        two elements.
+ * @line_number: The line number in the Monty byte code file.
+ */
+void print_multiply_error(unsigned int line_number)
+{
+        fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+}
+

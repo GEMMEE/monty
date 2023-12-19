@@ -66,6 +66,8 @@ void process_line(char *trimmed_line, unsigned int line_number,
 			sub(stack, line_number);
 		else if (strcmp(opcode, "div") == 0)
 			divide(stack, line_number);
+		else if (strcmp(opcode, "mul") == 0)
+			multiply(stack, line_number);
 		else if (strcmp(opcode, "push") == 0)
 			print_push_error(line_number);
 		else
