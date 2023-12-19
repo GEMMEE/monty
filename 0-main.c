@@ -1,8 +1,4 @@
 #include "monty.h"
-#include "errors.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 
 #define MAX_LINE_LENGTH 1024
@@ -40,33 +36,31 @@ void process_line(char *trimmed_line, unsigned int line_number,
 	int argument;
 	int matches = sscanf(trimmed_line, "%s %d", opcode, &argument);
 
-	if (matches == 2 && strcmp(opcode, "push") == 0)
+	if (matches == 2)
 	{
-		push(stack, argument);
+		if (strcmp(opcode, "push") == 0)
+			if (is_valid_integer(trimmed_line + strlen("push"),
+						&argument))
+				push(stack, argument);
+			else
+				print_push_error(line_number);
+		else
+			print_unknown_instruction_error(line_number,
+							trimmed_line);
 	}
 	else if (matches == 1)
 	{
 		if (strcmp(opcode, "pall") == 0)
-		{
 			pall(stack);
-		}
 		else if (strcmp(opcode, "pint") == 0)
-		{
 			pint(stack, line_number);
-		}
 		else if (strcmp(opcode, "pop") == 0)
-		{
 			pop(stack, line_number);
-		}
-		else if (strcmp(trimmed_line, "push") == 0)
-		{
+		else if (strcmp(opcode, "push") == 0)
 			print_push_error(line_number);
-		}
 		else
-		{
 			print_unknown_instruction_error(line_number,
 							trimmed_line);
-		}
 	}
 }
 
@@ -100,3 +94,24 @@ int main(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * is_valid_integer - checks if a given string represents a valid integer.
+ * @str: The input string to check.
+ * @result: A pointer to store the resulting integer if valid.
+ * Return: 1 if the string is a valid integer,
+ *         0 otherwise.
+ */
+int is_valid_integer(const char *str, int *result)
+{
+	/* Use strtol to convert the string to a long integer */
+	char *endptr;
+	long value = strtol(str, &endptr, 10);
+
+	/* Check if the entire string is a valid integer */
+	if (*endptr != '\0')
+	{
+		return (0);  /* Not a valid integer */
+	}
+	*result = (int)value;  /* Cast the result to an integer */
+	return (1);  /* Valid integer */
+}

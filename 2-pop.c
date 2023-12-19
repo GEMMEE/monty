@@ -1,7 +1,4 @@
 #include "monty.h"
-#include "errors.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * pop - removes the top element of the stack

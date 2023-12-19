@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdlib.h>
 
 /**
  * free_stack - Frees the memory allocated for the stack nodes.

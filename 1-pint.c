@@ -1,7 +1,4 @@
 #include "monty.h"
-#include "errors.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * pint - prints the value at the top of the stack, followed by a new line
