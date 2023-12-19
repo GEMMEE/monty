@@ -42,6 +42,8 @@ void pall(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+
 
 /* Function prototypes for error-related functions */
 void print_usage_error(void);
@@ -52,6 +54,7 @@ void print_unknown_instruction_error(unsigned int line_number, const char *instr
 void print_pint_error(unsigned int line_number);
 void print_pop_error(unsigned int line_number);
 void print_swap_error(unsigned int line_number);
+void print_add_error(unsigned int line_number);
 
 #endif /* MONTY_H */
 
