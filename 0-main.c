@@ -50,6 +50,10 @@ void process_line(char *trimmed_line, unsigned int line_number,
 		{
 			pall(stack);
 		}
+		else if (strcmp(opcode, "pint") == 0)
+		{
+			pint(stack, line_number);
+		}
 		else if (strcmp(trimmed_line, "push") == 0)
 		{
 			print_push_error(line_number);
