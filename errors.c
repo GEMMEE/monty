@@ -85,3 +85,13 @@ void print_swap_error(unsigned int line_number)
 	fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * print_add_error - Prints the 'can't add, stack too short' error message.
+ * @line_number: The line number in the Monty byte code file.
+ */
+void print_add_error(unsigned int line_number)
+{
+	fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+	exit(EXIT_FAILURE);
+}
