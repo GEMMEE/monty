@@ -60,6 +60,8 @@ void process_line(char *trimmed_line, unsigned int line_number,
 			swap(stack, line_number);
 		else if (strcmp(opcode, "add") == 0)
 			add(stack, line_number);
+		else if (strcmp(opcode, "nop") == 0)
+			nop(stack, line_number);
 		else if (strcmp(opcode, "push") == 0)
 			print_push_error(line_number);
 		else
