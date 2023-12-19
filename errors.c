@@ -116,3 +116,13 @@ void print_divide_error(unsigned int line_number)
         exit(EXIT_FAILURE);
 }
 
+/**
+ * print_zero_error - Prints the 'division by zero' error message
+ * @line_number: The line number in the Monty byte code file.
+ */
+void print_zero_error(unsigned int line_number)
+{
+        fprintf(stderr, "L%d: division by zero\n", line_number);
+        exit(EXIT_FAILURE);
+}
+

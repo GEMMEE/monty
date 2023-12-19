@@ -10,6 +10,9 @@ void divide(stack_t **stack, unsigned int line_number)
         if (!stack || !*stack || !(*stack)->next)
                 print_divide_error(line_number);
 
+	if ((*stack)->n == 0)
+		print_zero_error(line_number);
+
         (*stack)->next->n /= (*stack)->n;
         pop(stack, line_number);
 }
