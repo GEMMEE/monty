@@ -102,7 +102,7 @@ void print_add_error(unsigned int line_number)
  */
 void print_subtract_error(unsigned int line_number)
 {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
         exit(EXIT_FAILURE);
 }
 
