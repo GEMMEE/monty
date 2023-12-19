@@ -31,11 +31,19 @@ typedef struct instruction_s
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void free_stack(stack_t *stack);
 void push(stack_t **stack, int value);
 void pall(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t *stack);
+void pop(stack_t **stack, unsigned int line_number);
 
+void print_usage_error(void);
+void print_file_open_error(const char *filename);
+void print_malloc_error(void);
+void print_push_error(unsigned int line_number);
+void print_unknown_instruction_error(unsigned int line_number, const char *instruction);
+void print_pint_error(unsigned int line_number);
+void print_pop_error(unsigned int line_number);
 
 #endif /* MONTY_H */
 
