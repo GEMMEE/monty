@@ -53,7 +53,7 @@ void print_push_error(unsigned int line_number)
 void print_unknown_instruction_error(unsigned int line_number,
 					const char *instruction)
 {
-	fprintf(stderr, "L%d: unknown instruction %s", line_number, instruction);
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);
 	exit(EXIT_FAILURE);
 }
 
