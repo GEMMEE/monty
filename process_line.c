@@ -100,6 +100,9 @@ void switch_opcode(char *opcode, stack_t **stack, unsigned int line_number)
 	case MOD:
 		modulus(stack, line_number);
 		break;
+	case PCHAR:
+		pchar(stack, line_number);
+		break;
 	case PUSH:
 		print_error(PUSH_ERROR, line_number, NULL);
 	default:
@@ -134,6 +137,8 @@ int get_opcode_value(char *opcode)
 		return (MUL);
 	else if (strcmp(opcode, "mod") == 0)
 		return (MOD);
+	else if (strcmp(opcode, "pchar") == 0)
+		return (PCHAR);
 	else if (strcmp(opcode, "push") == 0)
 		return (PUSH);
 	/* Add other cases as needed */

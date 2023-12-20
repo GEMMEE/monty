@@ -16,6 +16,8 @@ static const ErrorInfo error_messages[] = {
 	{ZERO_DIVIDE_ERROR, "L%d: division by zero\n"},
 	{MULTIPLY_ERROR, "L%d: can't mul, stack too short\n"},
 	{MODULUS_ERROR, "L%d: can't mod, stack too short\n"},
+	{PCHAR_STACK_ERROR, "L%d: can't pchar, stack empty\n"},
+	{PCHAR_VALUE_ERROR, "L%d: can't pchar, value out of range\n"}
 };
 
 /**

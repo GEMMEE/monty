@@ -56,6 +56,8 @@ typedef struct instruction_s
  * @ZERO_DIVIDE_ERROR: Division by zero error.
  * @MULTIPLY_ERROR: Multiply instruction error (stack too short).
  * @MODULUS_ERROR: Modulus instruction error (stack too short).
+ * @PCHAR_STACK_ERROR: Print character instruction error (stack empty).
+ * @PCHAR_VALUE_ERROR: Print character instruction error (value out of range).
  */
 typedef enum ErrorType
 {
@@ -72,7 +74,9 @@ typedef enum ErrorType
 	DIVIDE_ERROR,
 	ZERO_DIVIDE_ERROR,
 	MULTIPLY_ERROR,
-	MODULUS_ERROR
+	MODULUS_ERROR,
+	PCHAR_STACK_ERROR,
+	PCHAR_VALUE_ERROR
 } ErrorType;
 
 /**
@@ -102,6 +106,7 @@ typedef struct ErrorInfo
  * @DIV: Divides the second top element by the top element
  * @MUL: Multiplies the top two elements of the stack
  * @MOD: Gives remainder of division of the second top by the top element
+ * @PCHAR: Prints the char at the top of the stack
  * @UNKNOWN: Represents an unknown opcode
  */
 typedef enum OpcodeValue
@@ -117,6 +122,7 @@ typedef enum OpcodeValue
 	MUL,
 	MOD,
 	PUSH,
+	PCHAR,
 	UNKNOWN
 } OpcodeValue;
 
@@ -144,7 +150,7 @@ void divide(stack_t **stack, unsigned int line_number);
 void multiply(stack_t **stack, unsigned int line_number);
 void modulus(stack_t **stack, unsigned int line_number);
 void process_comment(char *trimmed_line);
-
+void pchar(stack_t **stack, unsigned int line_number);
 
 /* Function prototype for error-related functions */
 void print_error(ErrorType type, unsigned int line_number,
