@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 
 	if (argc != 2)
-		print_usage_error();
+		print_error(USAGE_ERROR, 0, NULL);
 	if (!file)
-		print_file_open_error(argv[1]);
+		print_error(FILE_OPEN_ERROR, 0, argv[1]);
 	if (!line)
-		print_malloc_error();
+		print_error(MALLOC_ERROR, 0, NULL);
 	while (fgets(line, MAX_LINE_LENGTH, file) != NULL)
 	{
 		line_number++;

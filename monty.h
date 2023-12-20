@@ -38,7 +38,73 @@ typedef struct instruction_s
 
 #define MAX_LINE_LENGTH 1024
 
-typedef enum
+
+
+/**
+ * enum ErrorType - Enumeration of error types in the Monty interpreter.
+ * @USAGE_ERROR: Incorrect command-line usage error.
+ * @FILE_OPEN_ERROR: File open error.
+ * @MALLOC_ERROR: Memory allocation error.
+ * @PUSH_ERROR: Push instruction error.
+ * @UNKNOWN_INSTRUCTION_ERROR: Unknown instruction error.
+ * @PINT_ERROR: Pint instruction error (stack empty).
+ * @POP_ERROR: Pop instruction error (stack empty).
+ * @SWAP_ERROR: Swap instruction error (stack too short).
+ * @ADD_ERROR: Add instruction error (stack too short).
+ * @SUBTRACT_ERROR: Subtract instruction error (stack too short).
+ * @DIVIDE_ERROR: Divide instruction error (stack too short).
+ * @ZERO_DIVIDE_ERROR: Division by zero error.
+ * @MULTIPLY_ERROR: Multiply instruction error (stack too short).
+ * @MODULUS_ERROR: Modulus instruction error (stack too short).
+ */
+typedef enum ErrorType
+{
+	USAGE_ERROR,
+	FILE_OPEN_ERROR,
+	MALLOC_ERROR,
+	PUSH_ERROR,
+	UNKNOWN_INSTRUCTION_ERROR,
+	PINT_ERROR,
+	POP_ERROR,
+	SWAP_ERROR,
+	ADD_ERROR,
+	SUBTRACT_ERROR,
+	DIVIDE_ERROR,
+	ZERO_DIVIDE_ERROR,
+	MULTIPLY_ERROR,
+	MODULUS_ERROR
+} ErrorType;
+
+/**
+ * struct ErrorInfo - Represents information about an error, including its type
+ * and associated message.
+ * @type: the type of the error
+ * @message: the associated error message
+ */
+typedef struct ErrorInfo
+{
+	ErrorType type;
+	const char *message;
+} ErrorInfo;
+
+
+/**
+ * enum OpcodeValue - Represents the opcode values for Monty ByteCode
+ *                    instructions
+ * @PUSH: Pushes an element onto the stack
+ * @PALL: Prints all values on the stack
+ * @PINT: Prints the value at the top of the stack
+ * @POP: Removes the top element of the stack
+ * @SWAP: Swaps the top two elements of the stack
+ * @ADD: Adds the top two elements of the stack
+ * @NOP: No operation, does nothing
+ * @SUB: Subtracts the second top element from top element
+ * @DIV: Divides the second top element by the top element
+ * @MUL: Multiplies the top two elements of the stack
+ * @MOD: Gives remainder of division of the second top by the top element
+ * @UNKNOWN: Represents an unknown opcode
+ */
+typedef enum OpcodeValue
 {
 	PALL,
 	PINT,
@@ -50,17 +116,17 @@ typedef enum
 	DIV,
 	MUL,
 	MOD,
-	PUSH, /* add opcodes as needed */
+	PUSH,
 	UNKNOWN
 } OpcodeValue;
 
 
 void process_line(char *trimmed_line, unsigned int line_number,
-                stack_t **stack);
+		stack_t **stack);
 char *trim_spaces(char *str);
 int is_valid_integer(const char *str, int *result);
 void switch_opcode(char *opcode, stack_t **stack,
-                                        unsigned int line_number);
+		unsigned int line_number);
 int get_opcode_value(char *opcode);
 int is_valid_integer(const char *str, int *result);
 void free_stack(stack_t *stack);
@@ -80,22 +146,8 @@ void modulus(stack_t **stack, unsigned int line_number);
 void process_comment(char *trimmed_line);
 
 
-/* Function prototypes for error-related functions */
-void print_usage_error(void);
-void print_file_open_error(const char *filename);
-void print_malloc_error(void);
-void print_push_error(unsigned int line_number);
-void print_unknown_instruction_error(unsigned int line_number, const char *instruction);
-void print_pint_error(unsigned int line_number);
-void print_pop_error(unsigned int line_number);
-void print_swap_error(unsigned int line_number);
-void print_add_error(unsigned int line_number);
-void print_subtract_error(unsigned int line_number);
-void print_divide_error(unsigned int line_number);
-void print_zero_error(unsigned int line_number);
-void print_multiply_error(unsigned int line_number);
-void print_modulus_error(unsigned int line_number);
-
-
+/* Function prototype for error-related functions */
+void print_error(ErrorType type, unsigned int line_number,
+			const char *extra_info);
 #endif /* MONTY_H */
 

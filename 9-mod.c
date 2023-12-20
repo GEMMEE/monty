@@ -9,10 +9,10 @@
 void modulus(stack_t **stack, unsigned int line_number)
 {
         if (!stack || !*stack || !(*stack)->next)
-                print_modulus_error(line_number);
+                print_error(MODULUS_ERROR, line_number, NULL);
 
 	if ((*stack)->n == 0)
-		print_zero_error(line_number);
+		print_error(ZERO_DIVIDE_ERROR, line_number, NULL);
 
         (*stack)->next->n %= (*stack)->n;
         pop(stack, line_number);

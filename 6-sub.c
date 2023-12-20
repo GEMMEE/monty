@@ -8,7 +8,7 @@
 void sub(stack_t **stack, unsigned int line_number)
 {
         if (!stack || !*stack || !(*stack)->next)
-                print_subtract_error(line_number);
+                print_error(SUBTRACT_ERROR, line_number, NULL);
 
         (*stack)->next->n -= (*stack)->n;
         pop(stack, line_number);

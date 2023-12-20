@@ -24,11 +24,11 @@ void process_line(char *trimmed_line, unsigned int line_number,
 		if (is_valid_integer(trimmed_line + strlen("push"), &argument))
 			push(stack, argument);
 		else
-			print_push_error(line_number);
+			print_error(PUSH_ERROR, line_number, NULL);
 	}
 	else if (matches == 2)
 	{
-		print_unknown_instruction_error(line_number, trimmed_line);
+		print_error(UNKNOWN_INSTRUCTION_ERROR, line_number, trimmed_line);
 	}
 	else if (matches == 1)
 	{
@@ -101,9 +101,9 @@ void switch_opcode(char *opcode, stack_t **stack, unsigned int line_number)
 		modulus(stack, line_number);
 		break;
 	case PUSH:
-		print_push_error(line_number);
+		print_error(PUSH_ERROR, line_number, NULL);
 	default:
-		print_unknown_instruction_error(line_number, opcode);
+		print_error(UNKNOWN_INSTRUCTION_ERROR, line_number, opcode);
 	}
 }
 

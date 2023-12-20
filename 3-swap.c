@@ -11,7 +11,7 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack || !(*stack)->next)
 	{
-		print_swap_error(line_number);
+		print_error(SWAP_ERROR, line_number, NULL);
 	}
 
 	temp = (*stack)->next;
