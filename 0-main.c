@@ -1,5 +1,7 @@
 #include "monty.h"
 
+void free_stack(stack_t **);
+
 /**
  * main - Entry point
  * @argc: argument count
@@ -32,7 +34,7 @@ int main(int argc, char **argv)
 		opcode = strtok(line, " \n");
 		if (opcode == NULL)
 			continue;
-		for (i = 0; inst[i].opcode != NULL; i++)
+		for (found = 0, i = 0; inst[i].opcode != NULL; i++)
 		{
 			if (!strcmp(opcode, inst[i].opcode))
 			{
@@ -41,11 +43,32 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
+		if (!found)
+			break;
 	}
 	if (!found)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_no, opcode);
+		free_stack(&stack);
 		free(line), fclose(file), exit(EXIT_FAILURE);
 	}
 	return (0);
+}
+
+/**
+ * free_stack - frees the stack
+ * @stk: double pointer to the stack
+ *
+ *
+ */
+void free_stack(stack_t **stk)
+{
+	stack_t *tmp = NULL;
+
+	while (*stk)
+	{
+		tmp = *stk;
+		*stk = (*stk)->next;
+		free(tmp);
+	}
 }
