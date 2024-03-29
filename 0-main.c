@@ -1,74 +1,75 @@
 #include "monty.h"
 
-void free_stack(stack_t **);
+data_t data = DATA_INIT;
 
 /**
- * main - Entry point
- * @argc: argument count
- * @argv: argument vector
+ * monty - helper function for main function
+ * @args: pointer to struct of arguments from main
  *
- * Return: Always 0.
+ * Description: opens and reads from the file
+ * containing the opcodes, and calls the function that
+ * will find the corresponding executing function
+ *
  */
-int main(int argc, char **argv)
+void monty(args_t *args)
 {
-	FILE *file;
-	ssize_t rd;
-	size_t bufsize = 0;
-	unsigned int line_no = 0;
-	char *line, *opcode = NULL;
-	int i, found = 0;
-	stack_t *stack = NULL;
-	instruction_t inst[3] = {{"push", push}, {"pall", pall}, {NULL, NULL}};
+	size_t len = 0;
+	int read = 0;
+	void (*code_func)(stack_t **, unsigned int);
 
-	if (argc != 2)
-		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
-	file = fopen(argv[1], "r");
-	if (!file)
+	if (args->ac != 2)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, USAGE);
 		exit(EXIT_FAILURE);
 	}
-	while ((rd = getline(&line, &bufsize, file)) != -1)
+	data.fptr = fopen(args->av, "r");
+	if (!data.fptr)
 	{
-		line_no++;
-		opcode = strtok(line, " \n");
-		if (opcode == NULL)
-			continue;
-		for (found = 0, i = 0; inst[i].opcode != NULL; i++)
-		{
-			if (!strcmp(opcode, inst[i].opcode))
-			{
-				found = 1;
-				inst[i].f(&stack, line_no);
-				break;
-			}
-		}
-		if (!found)
+		dprintf(STDERR_FILENO, FILE_ERROR, args->av);
+		exit(EXIT_FAILURE);
+	}
+	while (1)
+	{
+		args->ln++;
+		read = getline(&(data.line), &len, data.fptr);
+		if (read < 0)
 			break;
+		data.token = _strtok(data.line, " \n");
+		if (data.token == NULL || *(data.token) == '#')
+		{
+			free_all(0);
+			continue;
+		}
+		code_func = get_func(data.token);
+		if (!code_func)
+		{
+			dprintf(STDERR_FILENO, UNKNOWN, args->ln, data.token);
+			free_all(1);
+			exit(EXIT_FAILURE);
+		}
+		code_func(&(data.stack), args->ln);
+		free_all(0);
 	}
-	if (!found)
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_no, opcode);
-		free_stack(&stack);
-		free(line), fclose(file), exit(EXIT_FAILURE);
-	}
-	return (0);
+	free_all(1);
 }
 
 /**
- * free_stack - frees the stack
- * @stk: double pointer to the stack
+ * main - entry point for monty bytecode interpreter
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
- *
+ * Return: EXIT_SUCCESS on success or EXIT_FAILURE on failure
+ * Author: Gamachu AD
  */
-void free_stack(stack_t **stk)
+int main(int argc, char **argv)
 {
-	stack_t *tmp = NULL;
+	args_t args;
 
-	while (*stk)
-	{
-		tmp = *stk;
-		*stk = (*stk)->next;
-		free(tmp);
-	}
+	args.av = argv[1];
+	args.ac = argc;
+	args.ln = 0;
+
+	monty(&args);
+
+	return (EXIT_SUCCESS);
 }

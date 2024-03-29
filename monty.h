@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <sys/types.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -38,9 +38,72 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* task 0 */
-void push(stack_t **stk, unsigned int ln);
-void pall(stack_t **stk, unsigned int ln);
+/**
+ * struct args_s - structure of arguments from main
+ * @av: name of the file from the command line
+ * @ac: number of arguments from main
+ * @ln: number of the current line in the file
+ *
+ * Description: arguments passed to main from the command line
+ * used in different functions, organized in a struct for clarity
+ */
+typedef struct args_s
+{
+	char *av;
+	int ac;
+	unsigned int ln;
+} args_t;
 
+/**
+ * struct data_s - extern data to access inside functions
+ * @line: line from the file
+ * @token: parsed token
+ * @stack: pointer to the stack
+ * @fptr: file pointer
+ * @qflag: flag for queue or stack
+ *
+ */
+typedef struct data_s
+{
+	char *line;
+	char *token;
+	stack_t *stack;
+	FILE *fptr;
+	int qflag;
+} data_t;
+
+typedef stack_t dlistint_t;
+
+extern data_t data;
+
+#define DATA_INIT {NULL, NULL, NULL, NULL, 0}
+
+#define USAGE "USAGE: monty file\n"
+#define FILE_ERROR "Error: Can't open file %s\n"
+#define UNKNOWN "L%u: unknown instruction %s\n"
+#define MALLOC_FAIL "Error: malloc failed\n"
+#define PUSH_FAIL "L%u: usage: push integer\n"
+
+
+
+/* main.c */
+void monty(args_t *args);
+
+/* get_func.c */
+void (*get_func(char *opcode))(stack_t **, unsigned int);
+void push_operation(stack_t **stack, unsigned int ln);
+void pall_operation(stack_t **stack, unsigned int ln);
+
+/* free.c */
+void free_all(int all);
+void free_dlistint(dlistint_t *);
+
+/* my_strtok.c */
+char *_strtok(char *s, const char *delim);
+
+/* helper functions */
+dlistint_t *add_dnodeint_beg(dlistint_t **, const int);
+dlistint_t *add_dnodeint_end(dlistint_t **, const int);
+size_t print_dlistint(const dlistint_t *);
 
 #endif /* MONTY_H */

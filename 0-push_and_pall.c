@@ -3,53 +3,51 @@
 int is_int(const char *);
 
 /**
- * push - implements push opcode
- * @stk: double pointer to top of the stack
- * @ln: line number
+ * push_operation - implements push operation
+ * @stk: double pointer to top of the stack to push to
+ * @ln: number of the line in the file
  *
  * Author: Gamachu AD
  */
-void push(stack_t **stk, unsigned int ln)
+void push_operation(stack_t **stk, unsigned int ln)
 {
 	stack_t *node = NULL;
-	char *arg = strtok(NULL, " \n");
+	int num;
 
-	if (!arg || !is_int(arg))
+	data.token = _strtok(NULL, " \n");
+	if (!(data.token) || !is_int(data.token))
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", ln);
+		dprintf(STDERR_FILENO, PUSH_FAIL, ln);
+		free_all(1);
 		exit(EXIT_FAILURE);
 	}
-	node = malloc(sizeof(*node));
+
+	num = atoi(data.token);
+
+	if (data.qflag == 0)
+		node = add_dnodeint_beg(stk, num);
+	/* else if (data.qflag == 1) */
+	/*	node = add_dnodeint_end(stk, num); */
 	if (!node)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		dprintf(STDERR_FILENO, MALLOC_FAIL);
+		free_all(1);
 		exit(EXIT_FAILURE);
 	}
-	node->n = atoi(arg);
-	node->prev = NULL;
-	node->next = *stk;
-	if (*stk)
-		(*stk)->prev = node;
-	*stk = node;
 }
 
 /**
- * pall - implements pall opcode
+ * pall_operation - implements pall opcode
  * @stk: double pointer to the top of stack
- * @ln: line number
+ * @ln: number of the line in the file
  *
  * Author: Gamachu AD
  */
-void pall(stack_t **stk, unsigned int ln)
+void pall_operation(stack_t **stk, unsigned int ln)
 {
-	stack_t *temp = *stk;
-
 	(void)ln;
-	while (temp)
-	{
-		printf("%d\n", temp->n);
-		temp = temp->next;
-	}
+	if (*stk)
+		print_dlistint(*stk);
 }
 
 /**
