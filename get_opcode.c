@@ -19,7 +19,7 @@ void (*get_func(char *opcode))(stack_t **, unsigned int)
 		{"add", add_operation},
 		{"nop", nop_operation},
 		{"sub", sub_operation},
-		/*{"div", div_operation},*/
+		{"div", div_operation},
 		/*{"mul", mul_operation},*/
 		/*{"mod", mod_operation},*/
 		{NULL, NULL}
