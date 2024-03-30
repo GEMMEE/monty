@@ -93,7 +93,6 @@ extern data_t data;
 #define DIV_ZERO "L%u: division by zero\n"
 #define MUL_FAIL "L%u: can't mul, stack too short\n"
 #define MOD_FAIL "L%u: can't mod, stack too short\n"
-#define MOD_ZERO "L%u: division by zero\n"
 
 
 /* main.c */
