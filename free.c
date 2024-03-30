@@ -33,9 +33,9 @@ void free_all(int all)
  * @head: pointer to the head of the list
  *
  */
-void free_dlistint(dlistint_t *head)
+void free_dlistint(stack_t *head)
 {
-	dlistint_t *temp;
+	stack_t *temp;
 
 	while (head)
 	{

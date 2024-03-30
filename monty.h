@@ -72,7 +72,7 @@ typedef struct data_s
 	int qflag;
 } data_t;
 
-typedef stack_t dlistint_t;
+typedef stack_t queue_t;
 
 extern data_t data;
 
@@ -106,17 +106,17 @@ void (*get_func(char *opcode))(stack_t **, unsigned int);
 
 /* free.c */
 void free_all(int all);
-void free_dlistint(dlistint_t *);
+void free_dlistint(stack_t *);
 
 /* _strtok.c */
 char *_strtok(char *s, const char *delim);
 
 /* task 0: 0-push_and_pall.c */
 void push_operation(stack_t **stack, unsigned int ln);
-dlistint_t *add_dnodeint_beg(dlistint_t **, const int);
-dlistint_t *add_dnodeint_end(dlistint_t **, const int);
+stack_t *add_at_head(stack_t **, const int);
 void pall_operation(stack_t **stack, unsigned int ln);
-size_t print_dlistint(const dlistint_t *);
+size_t print_elements(const stack_t *);
+int is_int(const char *);
 
 /* task 1:  1-pint.c */
 void pint_operation(stack_t **stk, unsigned int ln);
@@ -161,5 +161,10 @@ void rotl_operation(stack_t **stk, unsigned int ln);
 
 /* task 14:  14-rotr.c */
 void rotr_operation(stack_t **stk, unsigned int ln);
+
+/* task  15:  15-stack_or_queue.c */
+void queue_operation(queue_t **que, unsigned int ln);
+queue_t *add_at_tail(queue_t **que, int num);
+void stack_operation(stack_t **stk, unsigned int ln);
 
 #endif /* MONTY_H */

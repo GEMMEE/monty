@@ -26,12 +26,13 @@ void (*get_func(char *opcode))(stack_t **, unsigned int)
 		{"pstr", pstr_operation},
 		{"rotl", rotl_operation},
 		{"rotr", rotr_operation},
-		{NULL, NULL}
+		{"queue", queue_operation},
+		{"stack", stack_operation}
 	};
 
 	int i, num_operation = sizeof(op_arr) / sizeof(op_arr[0]);
 
-	for (i = 0; i < num_operation - 1; i++)
+	for (i = 0; i < num_operation; i++)
 	{
 		if (!strcmp(op_arr[i].opcode, opcode))
 			return (op_arr[i].f);
