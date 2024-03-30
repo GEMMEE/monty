@@ -95,8 +95,6 @@ void monty(args_t *args);
 
 /* get_func.c */
 void (*get_func(char *opcode))(stack_t **, unsigned int);
-void push_operation(stack_t **stack, unsigned int ln);
-void pall_operation(stack_t **stack, unsigned int ln);
 
 /* free.c */
 void free_all(int all);
@@ -105,9 +103,11 @@ void free_dlistint(dlistint_t *);
 /* _strtok.c */
 char *_strtok(char *s, const char *delim);
 
-/* helper functions */
+/* task 0: 0-push_and_pall.c */
+void push_operation(stack_t **stack, unsigned int ln);
 dlistint_t *add_dnodeint_beg(dlistint_t **, const int);
 dlistint_t *add_dnodeint_end(dlistint_t **, const int);
+void pall_operation(stack_t **stack, unsigned int ln);
 size_t print_dlistint(const dlistint_t *);
 
 /* task 1:  1-pint.c */
@@ -124,5 +124,9 @@ int get_len(stack_t **stk);
 
 /* task 4:  4-add.c */
 void add_operation(stack_t **stk, unsigned int ln);
+
+/* task 5:  5-nop.c */
+void nop_operation(stack_t **stk, unsigned int ln);
+
 
 #endif /* MONTY_H */
