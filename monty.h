@@ -122,5 +122,7 @@ int delete_top(stack_t **stk);
 void swap_operation(stack_t **stk, unsigned int ln);
 int get_len(stack_t **stk);
 
+/* task 4:  4-add.c */
+void add_operation(stack_t **stk, unsigned int ln);
 
 #endif /* MONTY_H */
