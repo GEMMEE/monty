@@ -118,6 +118,9 @@ int get_top(stack_t **stk);
 void pop_operation(stack_t **stk, unsigned int ln);
 int delete_top(stack_t **stk);
 
+/* task 3:  3-swap.c */
+void swap_operation(stack_t **stk, unsigned int ln);
+int get_len(stack_t **stk);
 
 
 #endif /* MONTY_H */
