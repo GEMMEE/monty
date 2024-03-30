@@ -153,5 +153,7 @@ void mod_operation(stack_t **stk, unsigned int ln);
 /* task 11:  11-pchar.c */
 void pchar_operation(stack_t **stk, unsigned int ln);
 
+/* task 12:  12-pstr.c */
+void pstr_operation(stack_t **stk, unsigned int ln);
 
 #endif /* MONTY_H */

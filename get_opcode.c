@@ -23,6 +23,7 @@ void (*get_func(char *opcode))(stack_t **, unsigned int)
 		{"mul", mul_operation},
 		{"mod", mod_operation},
 		{"pchar", pchar_operation},
+		{"pstr", pstr_operation},
 		{NULL, NULL}
 	};
 
