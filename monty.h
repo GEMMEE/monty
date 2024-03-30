@@ -159,5 +159,7 @@ void pstr_operation(stack_t **stk, unsigned int ln);
 /* task 13:  13-rotl.c */
 void rotl_operation(stack_t **stk, unsigned int ln);
 
+/* task 14:  14-rotr.c */
+void rotr_operation(stack_t **stk, unsigned int ln);
 
 #endif /* MONTY_H */
