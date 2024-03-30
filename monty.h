@@ -112,11 +112,11 @@ size_t print_dlistint(const dlistint_t *);
 
 /* task 1:  1-pint.c */
 void pint_operation(stack_t **stk, unsigned int ln);
-int get_dnode_top(stack_t **stk, unsigned int ln);
+int get_top(stack_t **stk);
 
 /* task 2:  2-pop.c */
 void pop_operation(stack_t **stk, unsigned int ln);
-int delete_dnode_top(stack_t **stk, unsigned int ln);
+int delete_top(stack_t **stk);
 
 
 

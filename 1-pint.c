@@ -11,23 +11,23 @@ void pint_operation(stack_t **stk, unsigned int ln)
 {
 	int top;
 
-	top = get_dnode_top(stk, ln);
+	if (!*stk)
+	{
+		dprintf(STDERR_FILENO, PINT_FAIL, ln);
+		free_all(1);
+		exit(EXIT_FAILURE);
+	}
+	top = get_top(stk);
 	printf("%d\n", top);
 }
 
 /**
- * get_dnode_top - returns the top element
+ * get_top - returns the top element
  * @stk: double pointer to top of the stack
- * @ln: the line number
  *
  * Return: the top element
  */
-int get_dnode_top(stack_t **stk, unsigned int ln)
+int get_top(stack_t **stk)
 {
-	if (!*stk)
-	{
-		dprintf(STDERR_FILENO, PINT_FAIL, ln);
-		exit(EXIT_FAILURE);
-	}
 	return ((*stk)->n);
 }

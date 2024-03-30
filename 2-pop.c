@@ -11,28 +11,31 @@ void pop_operation(stack_t **stk, unsigned int ln)
 {
 	int __attribute__((unused))deleted;
 
-	deleted = delete_dnode_top(stk, ln);
+	if (!*stk)
+	{
+		dprintf(STDERR_FILENO, POP_FAIL, ln);
+		free_all(1);
+		exit(EXIT_FAILURE);
+	}
+	deleted = delete_top(stk);
 	/* printf("deleted = %d\n", deleted); */
 }
 
 /**
- * delete_dnode_top - deleted the top element
+ * delete_top - deleted the top element
  * @stk: double pointer to head of stack
- * @ln: line number
  *
  * Return: the deleted element on success
  */
-int delete_dnode_top(stack_t **stk, unsigned int ln)
+int delete_top(stack_t **stk)
 {
 	int n;
+	stack_t *temp;
 
-	if (!*stk)
-	{
-		dprintf(STDERR_FILENO, POP_FAIL, ln);
-		exit(EXIT_FAILURE);
-	}
 	n = (*stk)->n;
-	*stk = (*stk)->next;
+	temp = (*stk)->next;
+	free(*stk);
+	*stk = temp;
 	if (*stk)
 		(*stk)->prev = NULL;
 	return (n);
