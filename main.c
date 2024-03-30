@@ -35,6 +35,9 @@ void monty(args_t *args)
 		if (read < 0)
 			break;
 		data.token = _strtok(data.line, " \n");
+		/* task 10 is handled here: *(data.token) == '#' */
+		/* If the first non-space character of a line is #, then */
+		/* treat this line as a comment(don't do anything) */
 		if (data.token == NULL || *(data.token) == '#')
 		{
 			free_all(0);
@@ -44,8 +47,7 @@ void monty(args_t *args)
 		if (!code_func)
 		{
 			dprintf(STDERR_FILENO, UNKNOWN, args->ln, data.token);
-			free_all(1);
-			exit(EXIT_FAILURE);
+			free_all(1), exit(EXIT_FAILURE);
 		}
 		code_func(&(data.stack), args->ln);
 		free_all(0);
