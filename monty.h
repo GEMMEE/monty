@@ -88,6 +88,12 @@ extern data_t data;
 #define POP_FAIL "L%u: can't pop an empty stack\n"
 #define SWAP_FAIL "L%u: can't swap, stack too short\n"
 #define ADD_FAIL "L%u: can't add, stack too short\n"
+#define SUB_FAIL "L%u: can't sub, stack too short\n"
+#define DIV_FAIL "L%u: can't div, stack too short\n"
+#define DIV_ZERO "L%u: division by zero\n"
+#define MUL_FAIL "L%u: can't mul, stack too short\n"
+#define MOD_FAIL "L%u: can't mod, stack too short\n"
+#define MOD_ZERO "L%u: division by zero\n"
 
 
 /* main.c */
@@ -127,6 +133,18 @@ void add_operation(stack_t **stk, unsigned int ln);
 
 /* task 5:  5-nop.c */
 void nop_operation(stack_t **stk, unsigned int ln);
+
+/* task 6:  6-sub.c */
+void sub_operation(stack_t **stk, unsigned int ln);
+
+/* task 7:  7-div.c */
+void div_operation(stack_t **stk, unsigned int ln);
+
+/* task 8:  8-mul.c */
+void mul_operation(stack_t **stk, unsigned int ln);
+
+/* task 9:  9-mod.c */
+void mod_operation(stack_t **stk, unsigned int ln);
 
 
 #endif /* MONTY_H */
