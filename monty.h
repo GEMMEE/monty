@@ -93,6 +93,9 @@ extern data_t data;
 #define DIV_ZERO "L%u: division by zero\n"
 #define MUL_FAIL "L%u: can't mul, stack too short\n"
 #define MOD_FAIL "L%u: can't mod, stack too short\n"
+#define PCHAR_FAIL "L%u: can't pchar, stack empty\n"
+#define PCHAR_NOT_ASCII "L%u: can't pchar, value out of range\n"
+
 
 
 /* main.c */
@@ -144,6 +147,11 @@ void mul_operation(stack_t **stk, unsigned int ln);
 
 /* task 9:  9-mod.c */
 void mod_operation(stack_t **stk, unsigned int ln);
+
+/* task 10: handled in main.c */
+
+/* task 11:  11-pchar.c */
+void pchar_operation(stack_t **stk, unsigned int ln);
 
 
 #endif /* MONTY_H */
