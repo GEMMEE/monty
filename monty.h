@@ -84,6 +84,7 @@ extern data_t data;
 #define MALLOC_FAIL "Error: malloc failed\n"
 #define PUSH_FAIL "L%u: usage: push integer\n"
 
+#define PINT_FAIL "L%u: can't pint, stack empty\n"
 
 
 /* main.c */
@@ -98,12 +99,17 @@ void pall_operation(stack_t **stack, unsigned int ln);
 void free_all(int all);
 void free_dlistint(dlistint_t *);
 
-/* my_strtok.c */
+/* _strtok.c */
 char *_strtok(char *s, const char *delim);
 
 /* helper functions */
 dlistint_t *add_dnodeint_beg(dlistint_t **, const int);
 dlistint_t *add_dnodeint_end(dlistint_t **, const int);
 size_t print_dlistint(const dlistint_t *);
+
+/* task 1:  1-pint.c */
+void pint_operation(stack_t **stk, unsigned int ln);
+int get_dnode_top(stack_t **stk, unsigned int ln);
+
 
 #endif /* MONTY_H */

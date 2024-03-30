@@ -13,6 +13,7 @@ void (*get_func(char *opcode))(stack_t **, unsigned int)
 	instruction_t op_arr[] = {
 		{"push", push_operation},
 		{"pall", pall_operation},
+		{"pint", pint_operation},
 		{NULL, NULL}
 	};
 
